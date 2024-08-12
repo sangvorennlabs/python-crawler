@@ -3,3 +3,4 @@ uvicorn
 asyncio
 playwright
 markdownify
+python-dotenv

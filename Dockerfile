@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the entire current directory to the container
 COPY . .
 
+# Install the latest version of pip
+RUN pip install --upgrade pip
+
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
