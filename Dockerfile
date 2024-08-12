@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Playwright and its browsers
 RUN playwright install
+RUN playwright install-deps
 
 # Expose the port
 EXPOSE 8000
