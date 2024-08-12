@@ -22,7 +22,7 @@ def submit(payload: dict):
     if not url:
         raise HTTPException(status_code=400, detail="URL is required")
     try:
-        web_content = asyncio.run(PupperteerModule.crawl_one_url(url))
+        web_content = await PupperteerModule.crawl_one_url(url)
         return web_content
     except Exception as e:
         logging.error(f"Error crawling URL {url}: {e}")
