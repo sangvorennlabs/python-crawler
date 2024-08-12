@@ -16,7 +16,7 @@ async def read_root():
     return {"message": "Hello World"}
 
 @app.post("/crawl")
-def submit(payload: dict):
+async def submit(payload: dict):
     url = payload.get("url")
     print(f"Received URL: {url}")
     if not url:
@@ -29,4 +29,4 @@ def submit(payload: dict):
         raise HTTPException(status_code=500, detail=f"Error: {e}")
 
 if __name__ == "__main__":
-    uvicorn.run('app:app', host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run('app:app', host="0.0.0.0", port=8000, reload=True)
