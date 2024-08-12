@@ -2,21 +2,40 @@ import asyncio
 from playwright.async_api import async_playwright
 import markdownify
 import logging
+import time
 
 class PupperteerModule:
-    
     @classmethod
     async def crawl_one_url(cls, url):
-        print(f"Fetching URL: {url}")
+        # print(f"Fetching URL: {url}")
         async with async_playwright() as p:
             for browser_type in [p.chromium, p.firefox, p.webkit]:
                 try:
+                    start_time = time.time()
                     browser = await browser_type.launch()
+                    logging.info(f"Launched browser {browser_type.name} in {time.time() - start_time} seconds")
+                    
+                    start_time = time.time()
                     page = await browser.new_page()
+                    logging.info(f"Opened new page in {time.time() - start_time} seconds")
+                    
+                    start_time = time.time()
                     await page.goto(url)
-                    await page.wait_for_timeout(2000)
+                    logging.info(f"Loaded URL in {time.time() - start_time} seconds")
+                    
+                    start_time = time.time()
+                    await page.wait_for_timeout(1000)
+                    logging.info(f"Waited for 2 seconds in {time.time() - start_time} seconds")
+                    
+                    start_time = time.time()
                     content = await page.content()
+                    logging.info(f"Got content in {time.time() - start_time} seconds")
+                    
+                    start_time = time.time()
                     await browser.close()
+                    logging.info(f"Closed browser in {time.time() - start_time} seconds")
+                    
+                    
                     return markdownify.markdownify(content)
                 except Exception as e:
                     logging.error(f"Error with browser {browser_type.name}: {e}")

@@ -18,7 +18,7 @@ async def read_root():
 @app.post("/crawl")
 async def submit(payload: dict):
     url = payload.get("url")
-    print(f"Received URL: {url}")
+    # print(f"Received URL: {url}")
     if not url:
         raise HTTPException(status_code=400, detail="URL is required")
     try:
