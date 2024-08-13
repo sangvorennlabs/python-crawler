@@ -1,4 +1,2 @@
 .env
-__pycache__
-*.pyc
-utils/__pycache__/
+**/__pycache__/
